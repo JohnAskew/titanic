@@ -4,7 +4,7 @@ import sys, os
 import pandas as pd 
 import matplotlib.pyplot as plt 
 from askew_utils import DF_Magic
-import enforce
+
 try:
     import modules
 except:
