@@ -1,9 +1,9 @@
 import pandas as pd 
-import utils
+import titanic_utils
 from sklearn import linear_model, preprocessing
 
 train = pd.read_csv("train.csv")
-utils.clean_data(train)
+titanic_utils.clean_data(train)
 
 target = train["Survived"].values # Desired output, usually named target
 feature_names = ["Pclass", "Age", "Sex", "Fare", "SibSp", "Embarked"]#, "Parch",  "Embarked"]
