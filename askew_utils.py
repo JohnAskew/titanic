@@ -11,7 +11,9 @@ import pandas as pd
 class DF_Magic(object):
     def __init__(self):
         pass
+    #-------------------------------------#
     def get_df(filename):
+    #-------------------------------------#
         df = pd.read_csv(filename)
         missing_values = ["n/a", "na", "--", "-", "N/A"] #Add missing value semiphores here
         blank_line = ''
@@ -54,10 +56,10 @@ class DF_Magic(object):
         print("#-------------------------#")
         print("------- Null count -------")
         print("#-------------------------#")
-#--------------------------------------------#
+       #--------------------------------------------#
         for col in df.columns:
             print('column {} has MEAN null_count: {}'.format(col, df[col].isnull().mean()))
-#--------------------------------------------#
+        #--------------------------------------------#
         print(blank_line)
         print("#-------------------------#")
         print("------ Null Shape --------")
@@ -79,15 +81,18 @@ class DF_Magic(object):
         print(df.sample(n=5))
         print(blank_line)
         return df
-
+    #-------------------------------------#
     def get_num_list(dataframe):
+    #-------------------------------------#
         num_list  = list(dataframe.dtypes[dataframe.dtypes != object].index)
         print("#-------------------------#")
         print("# Making a numeric list of numeric columns: \n",num_list)
         print("#-------------------------#")
         return num_list
 
+    #-------------------------------------#
     def usage():
+    #-------------------------------------#
         print("#-------------------------#")
         print("# DF_Magic usage")
         print("#")
@@ -96,10 +101,11 @@ class DF_Magic(object):
         print("# ...get_num_list = pass DFrame, get")
         print("#                   back LIST of numeric")
         print("#                   columns (for M/L")
-        print("#")
+        print("# ...get_df_name(df) = pass it dataframe")
+        print("#                      it returns df name")
         print("#")
         print("#-------------------------#")
 
-
+ 
 
 

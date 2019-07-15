@@ -214,7 +214,7 @@ bar_chart('familysize')
 ## DROP Features - this might cause other models to fail!
 #######################################
 ## Leaving sibsp for 021-model accuracy...features_drop = ['ticket', 'sibsp', 'parch']
-features_drop = ['ticket',  'parch']
+features_drop = ['ticket', 'name', 'parch']
 for dataset in train_test_data:
     dataset = dataset.drop(features_drop, axis = 1, inplace = True)
 train = train.drop(['passengerid'], axis = 1)
