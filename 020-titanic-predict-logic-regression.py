@@ -16,7 +16,8 @@ else:
 tu.clean_data(train)
 
 target = train["survived"].values # Desired output, usually named target
-feature_names = ["pclass", "age", "sex", "fare", "title", "sibsp", "embarked"]# adding "title" (a generated column) enhanced accuracy
+#feature_names = ["pclass", "age", "sex", "fare", "title", "sibsp", "embarked", "cabin", "familysize"]# adding "title" (a generated column) enhanced accuracy
+feature_names = ["pclass", "age", "sex", "fare", "title", "embarked", "cabin", "familysize"]# adding "title" (a generated column) enhanced accuracy
 features = train[feature_names].values #Hints
 
 

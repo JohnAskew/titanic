@@ -5,16 +5,17 @@ from askew_utils import DF_Magic as dfm
 from sklearn import tree, model_selection
 
 
-if os.path.exists("020-train_cleaned_data-lowercase_cols.pickle"):
-    with open("020-train_cleaned_data-lowercase_cols.pickle", 'rb') as in_file:
+if os.path.exists("010-train_lowercase_cols.pickle"):
+    with open("010-train_lowercase_cols.pickle", 'rb') as in_file:
         train = pickle.load(in_file)
-        print("Loading 020-train_cleaned_data-lowercase_cols.pickle")
+        print("Loading 010-train_lowercase_cols.pickle")
 else:
     train = dfm.get_df('train.csv')
     titanic_utils.clean_data(train) # We wrote this, a separate member named utils.py
 
 target = train["survived"].values # Desired output, usually named target. Separate the column answer from the rest of the columns.
-feature_names = ["pclass", "age", "sex", "fare", "title", "embarked", "sibsp"]#, "Parch"] # Other fields to analyze hidden patterns
+feature_names = ["pclass", "age", "sex", "fare", "title", "embarked", "sibsp", "cabin", ]# parch"] # Other fields to analyze hidden patterns
+
 features = train[feature_names].values #Hints
 
 

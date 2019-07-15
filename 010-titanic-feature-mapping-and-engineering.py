@@ -92,12 +92,13 @@ for dataset in train_test_data:
     dataset.loc[(dataset['age'] > 26) & (dataset['age'] <= 36), 'age'] = 2, #
     dataset.loc[(dataset['age'] > 36) & (dataset['age'] <= 62), 'age'] = 3, #
     dataset.loc[dataset['age']  > 62, 'age'] =4
-bar_chart('age')
-
 print("#------------------------------#")
 print("# Sample output of newly massaged age column")
 print("#------------------------------#")
 print(train[['age']].sample(n=5))
+bar_chart('age')
+
+
 
 #######################################
 ## Manipulate Embarked: Present visual first then change catagories to 0, 1, or 2
@@ -154,10 +155,14 @@ for xl in xlimx:
 #######################################
 for dataset in train_test_data:
     tu.map_cabin(dataset)
-bar_chart('cabin')
+
 pclass1 = train[train['pclass'] ==1]['cabin'].value_counts()
 pclass2 = train[train['pclass'] ==2]['cabin'].value_counts()
 pclass3 = train[train['pclass'] ==3]['cabin'].value_counts()
+print("#------------------------------#")
+print("# Sample output of newly massaged cabin column")
+print("#------------------------------#")
+print(train[['cabin']].sample(n=5))
 df = pd.DataFrame([pclass1, pclass2, pclass3])
 df.index = ["1st class", "2nd class", "3rd class"]
 df.plot(kind = 'bar', stacked = True, figsize = (5,10))
@@ -165,6 +170,59 @@ plt.title("Class wrt Cabin")
 plt.show()
 
 
+###
+### You may notice we have NAN in some cabin fields. This needs to change
+###     in order to process data in machine learning. M/L does NOT process
+###         nulls (nan).
+for dataset in train_test_data:
+    tu.map_cabin2(dataset)
+print("#------------------------------#")
+print("# Sample output of second massaged cabin column")
+print("#------------------------------#")
+print(train[['cabin']].sample(n=5))
+bar_chart('cabin')
+print("#------------------------------#")
+print("# VALUE COUNTS for second massaged cabin column")
+print("#------------------------------#")
+print(train['cabin'].value_counts())
+
+#######################################
+## ADD new field family_size - combo of sibsp and parch
+#######################################
+for dataset in train_test_data:
+    tu.map_familysize(dataset)
+facet = sns.FacetGrid(train, hue = 'survived', aspect = 4)
+facet.map(sns.kdeplot, 'familysize', shade = True)
+facet.set(xlim = (0, train['familysize'].max()))
+facet.add_legend()
+plt.xlim(0)
+plt.show()
+
+#######################################
+## MAP new field family_size 
+#######################################
+for dataset in train_test_data:
+    tu.map_familysize2(dataset)
+print("#------------------------------#")
+print("# Sample output of second massaged familysize column")
+print("#------------------------------#")
+print(train[['familysize']].sample(n=5))
+bar_chart('familysize')
+
+
+#######################################
+## DROP Features - this might cause other models to fail!
+#######################################
+## Leaving sibsp for 021-model accuracy...features_drop = ['ticket', 'sibsp', 'parch']
+features_drop = ['ticket',  'parch']
+for dataset in train_test_data:
+    dataset = dataset.drop(features_drop, axis = 1, inplace = True)
+train = train.drop(['passengerid'], axis = 1)
+### Need this for 020-model....train = train.drop(['survived'], axis = 1)
+print("#------------------------------#")
+print("# current display of dataframe")
+print("#------------------------------#")
+print(train.info())
 
 
 

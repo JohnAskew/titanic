@@ -24,14 +24,14 @@ def clean_catagoricals(x):
 # V A R I A B L E S to adjust processing accuracy
 #--------------------------------------#
 var_bootstrap = True
-var_n_estimators = 500 #1000# 1000 (400 = .873400)
+var_n_estimators = 1000# 1000 (400 = .873400)
 oob_score = False   # True of False does not seem to impact accuracy
 var_n_jobs = -1
 var_random_state = 1
 var_max_features = "auto"
-var_min_samples_leaf =4 # 5 #(8 - .873757)
+var_min_samples_leaf = 5 #(8 - .873757)
 var_criterion = 'mse'
-var_max_depth = 10
+var_max_depth = 30 #10
 var_warm = False
 
 if os.path.exists("010-train_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
@@ -75,7 +75,8 @@ print("BASELINE c-stat:", roc_auc_score(y, y_oob))
 #--------------------------------------#
 # Tweak one - drop irrelevant data
 #--------------------------------------#
-X.drop(["name", "ticket", "passengerid"], axis =1 , inplace = True)
+### Removed with drop logic moved to 010-feature....X.drop(["name", "ticket", "passengerid"], axis =1 , inplace = True)
+X.drop(["name"], axis =1 , inplace = True)
 
 #--------------------------------------#
 # Tweak two - Clean data
