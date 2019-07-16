@@ -3,7 +3,7 @@
 import sys, os
 import pandas as pd 
 import matplotlib.pyplot as plt 
-from askew_utils import DF_Magic
+from askew_utils import DF_Magic as dfm
 import pickle
 #-------------------------------------------------------#
 def rotate_xaxis(owner):
