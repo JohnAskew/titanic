@@ -76,7 +76,7 @@ print("BASELINE c-stat:", roc_auc_score(y, y_oob))
 # Tweak one - drop irrelevant data
 #--------------------------------------#
 ### Removed with drop logic moved to 010-feature....X.drop(["name", "ticket", "passengerid"], axis =1 , inplace = True)
-X.drop(["name"], axis =1 , inplace = True)
+#Removed with drop logic moved to 010-feature...X.drop(["name"], axis =1 , inplace = True)
 
 #--------------------------------------#
 # Tweak two - Clean data
