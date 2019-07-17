@@ -14,16 +14,24 @@ from askew_utils import DF_Magic as dfm
 # V A R I A B L E S  T O  C O N T R O L
 #-------------------------------------#
 njobs = -1          #n_jobs is the number of parallel jobs
-njobs_dtree = 1
+njobs_dtree = 1     #n_jobs for Decision Tree
 njobs_rfc =1        #n_jobs for Random Forest Classifier
+
 xor = 'accuracy'    #score is the parameter for scoring, such as 'precision'
+
 nneighbors = 5      #n_neighbors is the number of nearest neighbors to consider
+
 nsplits = 10        #n_splits is number of splits for decisions
-nsplits_dtree = 25
-nsplits_rfc = 40    #n_splits with Random Forect Classifier
-nestimators = 400   #n_estimators states how many estimators to allocate
+nsplits_dtree = 25  #n_splits for Decision Tree
+nsplits_rfc = 50    #n_splits with Random Forect Classifier
+
+nestimators = 400   #n_estimators for Random Forest Classifier = states how many estimators to allocate
+
 shffl = True        #shuffle - refer to python.org documentation for details
+
 random = 42         #random_state - machine learning started seed.
+random_rfc = 1      #random_state for Remote Forest Classifier
+
 gama = "auto"       #deprecated variable added for SVM sectionto remove warnings.
 
 njobs_options = [1, -1]
@@ -364,8 +372,8 @@ plt.show()
 
 ##########################################
 # RRRR     FFFFFFF    CCCCCC
-# R   R    F         C
-# R  R     F        C
+# R    R   F         C
+# R   R    F        C
 # RRR      FFFFF    C
 # R  R     F        C
 # R    R   F         C
@@ -377,7 +385,7 @@ plt.show()
 results = []
 for nestimators_option in nestimators_options:
     clf = RandomForestClassifier(n_estimators = nestimators_option)
-    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random), n_jobs = njobs_rfc, scoring = xor)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random_rfc), n_jobs = njobs_rfc, scoring = xor)
     mean_score = round(np.mean(score) * 100, 2)
     results.append(mean_score)
     print("#-------------------------------------#")
@@ -400,7 +408,7 @@ plt.show()
 results = []
 for nsplits_option in nsplits_options:
     clf = RandomForestClassifier(n_estimators = nestimators)
-    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_option, shuffle = shffl, random_state = random), n_jobs = njobs_rfc, scoring = xor)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_option, shuffle = shffl, random_state = random_rfc), n_jobs = njobs_rfc, scoring = xor)
     mean_score = round(np.mean(score) * 100, 2)
     results.append(mean_score)
     print("#-------------------------------------#")
@@ -422,7 +430,7 @@ plt.show()
 results = []
 for shffl_option in shffl_options:
     clf = RandomForestClassifier(n_estimators = nestimators)
-    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl_option, random_state = random), n_jobs = njobs_rfc, scoring = xor)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl_option, random_state = random_rfc), n_jobs = njobs_rfc, scoring = xor)
     mean_score = round(np.mean(score) * 100, 2)
     results.append(mean_score)
     print("#-------------------------------------#")
@@ -466,7 +474,7 @@ plt.show()
 results = []
 for njobs_option in njobs_options:
     clf = RandomForestClassifier(n_estimators = nestimators)
-    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random), n_jobs = njobs_option, scoring = xor)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random_rfc), n_jobs = njobs_option, scoring = xor)
     mean_score = round(np.mean(score) * 100, 2)
     results.append(mean_score)
     print("#-------------------------------------#")
@@ -488,7 +496,7 @@ plt.show()
 results = []
 for xor_option in xor_options:
     clf = RandomForestClassifier(n_estimators = nestimators)
-    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random), n_jobs = njobs_rfc, scoring = xor_option)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random_rfc), n_jobs = njobs_rfc, scoring = xor_option)
     mean_score = round(np.mean(score) * 100, 2)
     results.append(mean_score)
     print("#-------------------------------------#")
@@ -504,7 +512,14 @@ plt.title('Random Forest Classifer scoring results')
 plt.xlabel('Scoring')
 plt.ylabel('Accuracy')
 plt.show()
-
+#######################################
+# N       N     A     IIIIIII  V         V  EEEEEEE
+# N N     N    A A       I      V       V   E
+# N  N    N   A   A      I       V     V    EEEE
+# N    N  N  AAAAAAA     I        V   V     E
+# N     N N  A     A     I         V V      E
+# N       N  A     A  IIIIIII       V       EEEEEEE
+#######################################
 #
 ## Naive Bayes using n_splits
 #
@@ -571,35 +586,179 @@ plt.title('Naive Bayes random_state results')
 plt.xlabel('Random_State')
 plt.ylabel('Accuracy')
 plt.show()
-
 #
-## Support Vector Machine
+## Naive Bayes using n_jobs
 #
-clf = SVC(gamma = gama)
-score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random), n_jobs = njobs, scoring = xor)
-print("#-------------------------------------#")
-print("SVM score: ", end = '')
-print(score)
-print("#-------------------------------------#")
-print("")
+results = []
+for njobs_option in njobs_options:
+    clf = GaussianNB()
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random), n_jobs = njobs_option, scoring = xor)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("Naive Bayes n_jobs of", njobs_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("Naive Bayes n_jobs of", njobs_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, njobs_options).plot()
+plt.title('Naive Bayes n_jobs results')
+plt.xlabel('Number of Jobs')
+plt.ylabel('Accuracy')
+plt.show()
+#
+## Naive Bayes using scoring
+#
+results = []
+for xor_option in xor_options:
+    clf = GaussianNB()
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random), n_jobs = njobs, scoring = xor_option)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("Naive Bayes scoring of", xor_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("Naive Bayes scoring of", xor_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, xor_options).plot()
+plt.title('Naive Bayes scoring results')
+plt.xlabel('Score')
+plt.ylabel('Accuracy')
+plt.show()
+#######################################
+#     SSSSSS   V            V  M             M
+#    SS         V          V   MM           MM
+#       SS       V        V    M M         M M
+#          SS     V      V     M   M      M  M
+#           SS     V    V      M     M  M    M
+#          SS       V V        M       M     M
+#     SSSSS          V         M             M
+#######################################
+#
+## Support Vector Machine using n_splits
+#
+results = []
+for nsplits_option in nsplits_options:
+    clf = SVC(gamma = gama)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_option, shuffle = shffl, random_state = random), n_jobs = njobs, scoring = xor)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("SVM using nsplit", nsplits_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("SVM using nsplit", nsplits_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, nsplits_options).plot()
+plt.title('Support Vector Machine n_splits results')
+plt.xlabel('Number of Splits')
+plt.ylabel('Accuracy')
+plt.show()
+#
+## Support Vector Machine using shuffle
+#
+results = []
+for shffl_option in shffl_options:
+    clf = SVC(gamma = gama)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl_option, random_state = random), n_jobs = njobs, scoring = xor)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("SVM using shuffle", shffl_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("SVM using shuffle", shffl_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, shffl_options).plot()
+plt.title('Support Vector Machine shuffle results')
+plt.xlabel('Number of Shuffles')
+plt.ylabel('Accuracy')
+plt.show()
+#
+## Support Vector Machine using random_state
+#
+results = []
+for random_option in random_options:
+    clf = SVC(gamma = gama)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random_option), n_jobs = njobs, scoring = xor)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("SVM using random_state", random_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("SVM using random_state", random_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, random_options).plot()
+plt.title('Support Vector Machine random_state results')
+plt.xlabel('Random State')
+plt.ylabel('Accuracy')
+plt.show()
+#
+## Support Vector Machine using n_jobs
+#
+results = []
+for njobs_option in njobs_options:
+    clf = SVC(gamma = gama)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random), n_jobs = njobs_option, scoring = xor)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("SVM using n_jobs", njobs_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("SVM using n_jobs", njobs_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, njobs_options).plot()
+plt.title('Support Vector Machine n_jobs results')
+plt.xlabel('Number of Jobs')
+plt.ylabel('Accuracy')
+plt.show()
+#
+## Support Vector Machine using scoring
+#
+results = []
+for xor_option in xor_options:
+    clf = SVC(gamma = gama)
+    score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random), n_jobs = njobs, scoring = xor_option)
+    mean_score = round(np.mean(score) * 100, 2)
+    results.append(mean_score)
+    print("#-------------------------------------#")
+    print("SVM using scoring", xor_option, "score: ", score)
+    print("#-------------------------------------#")
+    print("")
+    print("#-------------------------------------#")
+    print("SVM using scoring", xor_option, "MEAN score: ", mean_score)
+    print("#-------------------------------------#")
+    print("")
+pd.Series(results, xor_options).plot()
+plt.title('Support Vector Machine scoring results')
+plt.xlabel('Scoring')
+plt.ylabel('Accuracy')
+plt.show()
 
 
-## Support Vector Machine mean score
-#
-print("#-------------------------------------#")
-print("# SVM mean score:", end = '')
-print(round(np.mean(score) * 100, 2))
-print("#-------------------------------------#")
-print("")
 
-#
 ## Testing
 #
 #clf = SVC(gamma = gama)
 #clf = KNeighborsClassifier(n_neighbors = 20)
 #clf = DecisionTreeClassifier()
 clf = RandomForestClassifier(n_estimators = nestimators)
-score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits, shuffle = shffl, random_state = random), n_jobs = njobs, scoring = xor)
+score = cross_val_score(clf, training_data, target, cv = KFold(n_splits = nsplits_rfc, shuffle = shffl, random_state = random_rfc), n_jobs = njobs_rfc, scoring = xor)
 clf.fit(training_data, target)
 test_data = test.drop('passengerid', axis = 1).copy()
 prediction = clf.predict(test_data)
