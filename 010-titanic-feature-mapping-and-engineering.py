@@ -37,6 +37,7 @@ test = dfm.get_df('test.csv')
 train_test_data = [train, test]
 #-------------------------------------#
 
+
 #######################################
 ## Build Title Map and set titles to either 0, 1, 2 or 3
 #######################################
@@ -225,13 +226,18 @@ print("#------------------------------#")
 print(train.info())
 
 
+target = train['survived']
+training_data = train.drop('survived', axis = 1)
 
 
+with open("010-training_data_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
+        pickle.dump(training_data, in_file)                     #Save results from above to Pickle.
 
+with open("010-target_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
+        pickle.dump(target, in_file)                     #Save results from above to Pickle.
 
-
-with open("010-train_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
-        pickle.dump(train, in_file)                     #Save results from above to Pickle.
+# with open("010-train_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
+#         pickle.dump(train, in_file)                     #Save results from above to Pickle.
 
 with open("010-test_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
         pickle.dump(test, in_file)                     #Save results from above to Pickle.

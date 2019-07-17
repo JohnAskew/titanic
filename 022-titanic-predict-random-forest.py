@@ -47,7 +47,7 @@ y = X.pop("survived")
 #
 ## Fill in missing values as machine learning does not fare well with nulls.
 #
-X['age'].fillna(X.age.mean(), inplace = True)  # Fill in missing Age with average age
+### Moved to titanic_utils...X['age'].fillna(X.age.mean(), inplace = True)  # Fill in missing Age with average age
 
 #
 ## Extract the columns that only contain numbers
