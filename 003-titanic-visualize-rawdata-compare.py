@@ -22,7 +22,7 @@ else:
 
 
 df['survived']  = df['survived'].map({0:"Died", 1:"Survived"})
-fig = plt.figure(figsize = (18,12)).suptitle('Titanic Training Data Analysis: Page 3')
+fig = plt.figure(figsize = (18,12)).suptitle('Pristine Data: Titanic Training Data Analysis: Page 3')
 
 
 #-----------------------------------#

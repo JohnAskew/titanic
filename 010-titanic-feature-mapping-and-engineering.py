@@ -16,7 +16,7 @@ def bar_chart(feature):
         df = pd.DataFrame([survived, dead])
         df.index = ['survived', 'died']
         df.plot(kind = 'bar', stacked = True, figsize = (10,15))
-        plt.title("Survived vs. Died wrt \"" + feature + "\"")
+        plt.title("Mapped Features: Survived vs. Died wrt \"" + feature + "\" column")
         plt.show()
 
 #######################################
@@ -236,8 +236,8 @@ with open("010-training_data_lowercase_cols.pickle", "wb") as in_file:    #Pickl
 with open("010-target_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
         pickle.dump(target, in_file)                     #Save results from above to Pickle.
 
-# with open("010-train_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
-#         pickle.dump(train, in_file)                     #Save results from above to Pickle.
+with open("010-train_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
+        pickle.dump(train, in_file)                     #Save results from above to Pickle.
 
 with open("010-test_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
         pickle.dump(test, in_file)                     #Save results from above to Pickle.
