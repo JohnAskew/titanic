@@ -5,6 +5,32 @@ from askew_utils import DF_Magic as dfm
 from sklearn import tree, model_selection
 
 
+
+try:
+    if os.path.exists("010-test_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
+        with open("010-test_lowercase_cols.pickle", 'rb') as in_file:
+            test = pickle.load(in_file)
+            print("Loading 010-test_lowercase_cols.pickle")
+except:
+    raise Exception ("Unable to open 010-test_lowercase_cols.pickle")
+
+
+try:
+    if os.path.exists("010-training_data_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
+        with open("010-training_data_lowercase_cols.pickle", 'rb') as in_file:
+            training_data = pickle.load(in_file)
+            print("Loading 010-training_data_lowercase_cols.pickle")
+except:
+    raise Exception ("Unable to open 010-training_data_lowercase_cols.pickle")
+
+try:
+    if os.path.exists("010-target_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
+        with open("010-target_lowercase_cols.pickle", 'rb') as in_file:
+            target = pickle.load(in_file)
+            print("Loading 010-target_lowercase_cols.pickle")
+except:
+    raise Exception ("Unable to open 010-targetlowercase_cols.pickle")
+
 if os.path.exists("010-train_lowercase_cols.pickle"):
     with open("010-train_lowercase_cols.pickle", 'rb') as in_file:
         train = pickle.load(in_file)
@@ -12,6 +38,7 @@ if os.path.exists("010-train_lowercase_cols.pickle"):
 else:
     train = dfm.get_df('train.csv')
     titanic_utils.clean_data(train) # We wrote this, a separate member named utils.py
+
 
 target = train["survived"].values # Desired output, usually named target. Separate the column answer from the rest of the columns.
 feature_names = ["pclass", "age", "sex", "fare", "title", "embarked", "sibsp", "cabin", ]# parch"] # Other fields to analyze hidden patterns
@@ -46,6 +73,25 @@ generalized_tree = tree.DecisionTreeClassifier(
    ,min_samples_leaf = 1
    ,
     )
+generalized_tree.fit(training_data, target)
+test_data = test.drop('passengerid', axis = 1).copy()
+prediction = generalized_tree.predict(test_data)
+print("#-------------------------------------#")
+print("# Testing prediction")
+print("#-------------------------------------#")
+print("")
+
+#
+## Submission
+#
+import pandas as pd 
+submission = pd.DataFrame({
+    "PassengerID":test['passengerid'],
+    "Survived":prediction
+    })
+submission.set_index('PassengerID', inplace = True)
+submission.to_csv('submission_Generalized_Tree.csv')
+# pd.read_csv('submission.csv')
 
 generalized_tree_ = generalized_tree.fit(features, target)
 
