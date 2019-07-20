@@ -48,7 +48,6 @@ we fill in to replace the missing data, as machine learning
 does not fare well with missing data or "nan" (not a number,
 or NULLS).
 
-
 #### 020-titanic-predict-logic-regression.py
 Learning can be as much observing what NOT to do as learning what to do. 
 Here we use a simple LogisticRegression example. We observer the prediction displayed in the command line output, 
@@ -60,6 +59,26 @@ and the polynomial model, we see the polynomial model reveals a higher predictio
 It serves to point out a hint, from the output derived from running the raw data visualization programs
 starting with 00x- (000-xxx, 001-xxx, 002-xxx). The data does not fit or produce the training answers,
 which can be mapped to a simple line. We should consider using a more accurate model. 
+
+#### 021-titanic-predict-decision-tree.py
+The point of this module is to prove you can't just take predictions as being true and 
+as accurate as they report. Sad, I know. We start with simple decision tree models,
+where we now are exposed to tuning a model using options (parameters and their arguments).
+The first decision tree model is just a simple model, with only one option being tuned. 
+An output file of predictions is generated and can be uploaded to the 
+kaggle.com's "Titanic competition" website for judging the actual results. 
+
+There is a second model, which is a generalized decision tree. Here we specify more options to further tune the model. The model paragraph being tuned appears as:
+##### generalized_tree = tree.DecisionTreeClassifier(
+     random_state = 42
+    ,max_depth =10
+    ,min_samples_split =5 ...
+Feel free to play around with these options and observe how changing each parameter's argument
+can impact the reported prediction results displayed in the command line output. The conclusion 
+is the prediction result listed in the command line output, as well as a prediction results csv file, 
+which too, can be uploaded to kaggle.com for judging the actual results of our model. Be prepared 
+for a let-down, but chins high and chests out, as we run the next models, our accuracy does truly improve.
+    
 
 
 
