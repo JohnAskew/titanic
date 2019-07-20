@@ -82,8 +82,14 @@ for a let-down, but chins high and chests out, as we run the next models, our ac
 
 #### 022-titanic-tune-random-forest.py
 This modules moves into more intermediate aspects of machine learning and negligibly more advanced
-Python functionality. We introduce: using a cross validation function to review our generated predictions
-and provide a second opinion of how accurate our predictions actually were. This module also exposes user
+Python functionality: cross_validating our results, generating interactive charts revealing 
+the model's accuracy and additional feature engineering. This module further relies on model tuning 
+and engages user to tune the model by changing the option's arguments. Module objective is to engage user
+in changing arguments (settings) for reviewing the impact to prediction accuracy. You may skip reading the 
+remainder of this section and simply run the module.
+
+We introduce cross validation functionality to review our generated predictions
+and provide a second opinion of how accurate our predictions actually were. This module also exposes the user
 to Panda's "get_dummy" functionality, which takes a feature (column), reviews the contents and creates 
 new columns containing only a zero or a one. This 0 or 1 state if referred to a "binary" state, 
 implies there are only 2 answers: 0 or 1, True or False, etc. Example: our "sex" (gender) column 
@@ -98,12 +104,13 @@ Observing there is a considerable amount of code that has been commented out, so
 allow the user to uncomment or execute the code, as a means of exploration. Secondarily, it leaves me 
 bread crumbs to maintain the code after a few 24 hours have passed.
 
-Moving on. we feature engineer the column / feature, "cabin". Past observations of the raw data reveals a wide range
-of data for this feature, generally in the format of a letter and then some numbers, such as C28. In a few instances, multiple
-cabins are listed in the column (feature) separated by a comma. This will not play well with simple
+Moving on, we feature engineer the column / feature, "cabin". Past observations of the raw data reveals a wide range
+of data for this feature, generally in the format of a letter and then some numbers, such as C28. In a few instances,
+multiple cabins are listed in the column (feature) separated by a comma. This will not play well with simple
 machine learning models. This module provides ONE WAY of feature engineering the "cabin" feature, the
 objective is to point out to the user, that feature engineering is an art (imho) and open for the user
-to change and manipulate the data contained in the cabin column, to drive what ever results you are after.
+to change and manipulate the data contained in the cabin column, to drive what ever results you are after. 
+Our example simply uses the very first character as the cabin.
 
 
 
