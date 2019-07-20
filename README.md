@@ -15,9 +15,8 @@ few values vs. a broad range of values, which will require feature engineering -
 will be covered in later modules.
 
 #### 001-titanic-visualize-rawdata-compare.py
-Raw data visuals comparing data (features, or each relevant
-column in spreadsheet) to who survived.
-It demonstrates simply code for extracting data
+Raw data visuals comparing data (features, or each relevant column in spreadsheet)
+to who survived. It demonstrates simply code for extracting data
 and using simple bar charts.
 
 #### 002-titanic-visualize-rawdata-compare.py
@@ -58,7 +57,9 @@ to using a little algebra - polynomials. By comparing the outputs between a simp
 and the polynomial model, we see the polynomial model reveals a higher prediction accuracy. 
 It serves to point out a hint, from the output derived from running the raw data visualization programs
 starting with 00x- (000-xxx, 001-xxx, 002-xxx). The data does not fit or produce the training answers,
-which can be mapped to a simple line. We should consider using a more accurate model. 
+which can be mapped to a simple line. We should consider using a more appropriate model. Did you catch 
+the previous point? We are looking for a more appropriate model, not a more accurate model. The Zen lies
+in the addage: "What is good is the enemy of what is best".
 
 #### 021-titanic-predict-decision-tree.py
 The point of this module is to prove you can't just take predictions as being true and 
