@@ -112,6 +112,19 @@ objective is to point out to the user, that feature engineering is an art (imho)
 to change and manipulate the data contained in the cabin column, to drive what ever results you are after. 
 Our example simply uses the very first character as the cabin.
 
+#### 030-titanic-tune_models_and_test.py
+One man's meat is another man's poison. One model's optimized parameter is the death of another model. 
+Ensure you are comfortable with module 022-titanic-tune-random-forest.py before executing this module.
+Warning, this module's visualizations of tuning accuracy takes time and consider this a 5 minute investment of 
+your time to get through the entire module. This module introduces new models and exposes user to the 
+intricacies of tuning each model. The same tuning parameter can produce different results between models. 
+Each model produces a command line output of prediction results as well as a csv file for uploading to kaggle.com.
+
+#### 031-test-general-tree.py
+Breather, in terms of complexity and time. Simple repeat of Decision Tree using the DecisionTreeClassifer model
+to produce prediction results and a results csv file for uploading to kaggle.com. NO visals generated, just 
+command line output of prediction accuracy and a second opinion using cross_validation functionality previously
+introduced. 
 
 
 
