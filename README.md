@@ -79,7 +79,33 @@ can impact the reported prediction results displayed in the command line output.
 is the prediction result listed in the command line output, as well as a prediction results csv file, 
 which too, can be uploaded to kaggle.com for judging the actual results of our model. Be prepared 
 for a let-down, but chins high and chests out, as we run the next models, our accuracy does truly improve.
-    
+
+#### 022-titanic-tune-random-forest.py
+This modules moves into more intermediate aspects of machine learning and negligibly more advanced
+Python functionality. We introduce: using a cross validation function to review our generated predictions
+and provide a second opinion of how accurate our predictions actually were. This module also exposes user
+to Panda's "get_dummy" functionality, which takes a feature (column), reviews the contents and creates 
+new columns containing only a zero or a one. This 0 or 1 state if referred to a "binary" state, 
+implies there are only 2 answers: 0 or 1, True or False, etc. Example: our "sex" (gender) column 
+contains either "male" or "female". After sending the column "sex" through the Panda's get_dummy functionality
+results in 2 new columns - "sex_male" and "sex_female", each column containing either 0 or 1. If the "sex_male"
+column contains a 1, then that record is for a male. You may be wondering why we need 2 separate columns 
+to specify sex or gender. You don't. This was only an example, simplified for explanation.
+
+Starting with a simple RandomForestRegressor model, we take our features, or columns
+with numeric data (not data containing alphabetic), train and make a prediction, serving to build a baseline.
+Observing there is a considerable amount of code that has been commented out, so as not to run, remains to 
+allow the user to uncomment or execute the code, as a means of exploration. Secondarily, it leaves me 
+bread crumbs to maintain the code after a few 24 hours have passed.
+
+Moving on. we feature engineer the column / feature, "cabin". Past observations of the raw data reveals a wide range
+of data for this feature, generally in the format of a letter and then some numbers, such as C28. In a few instances, multiple
+cabins are listed in the column (feature) separated by a comma. This will not play well with simple
+machine learning models. This module provides ONE WAY of feature engineering the "cabin" feature, the
+objective is to point out to the user, that feature engineering is an art (imho) and open for the user
+to change and manipulate the data contained in the cabin column, to drive what ever results you are after.
+
+
 
 
 
