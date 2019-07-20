@@ -126,8 +126,24 @@ to produce prediction results and a results csv file for uploading to kaggle.com
 command line output of prediction accuracy and a second opinion using cross_validation functionality previously
 introduced. 
 
+#### 040-titanic-simple-KMeans-predict.py
+Stubbed until module finalized.
 
+#### 100-example-using-dummies.py
+Practice module demonstrating Panda's get_dummy functionality.
 
+#### 101-example-feature-engineering-using-dummies.py
+Practice module which feature engineer's "sex" and "embarked" columns and then feeds results to Panda's get_dummy.
+End result is new dataframe with new columns matching the engineered "sex" and "embarked" values. Upon review
+you may be considering having 2 columns to represent "sex" as being redundant. That would be a secondary point of 
+this module. Feel free to drop one of the columns. Another exercise on feature engineering can be seen in the
+module "titanic_utils". The function starting with the line: "def clean_data(data):" has 2 "sex" column mapping
+lines: "data.loc[data["sex"] == "male", "sex"] = 0", "data.loc[data["sex"] == "female", "sex"] =1". We engage
+the user to contemplate the optimal way to change "male and "female" into 0 or 1, where  0 = male and 1 = female.
+This is easily accomplished with an advanced Python feature known as a "list comprehension", but is deemed to be
+too advanced a topic to explain on an introductory project. Ideally, there would be one column named, "sex" 
+containing 0 and 1. Feel free to change the code and implement your own solution. The overall objective of this 
+project is to get the user engaged and start thinking outside the narrow box of the example's provided.
 
 # References:
 1. Minsuk Heo - "Kaggle - Titanic Data Analysis".
