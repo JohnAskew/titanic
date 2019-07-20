@@ -48,6 +48,21 @@ we fill in to replace the missing data, as machine learning
 does not fare well with missing data or "nan" (not a number,
 or NULLS).
 
+
+#### 020-titanic-predict-logic-regression.py
+Learning can be as much observing what NOT to do as learning what to do. 
+Here we use a simple LogisticRegression example. We observer the prediction displayed in the command line output, 
+is NOT that accurate, ergo propter hoc, we should look for a more accurate model 
+or at least tune our existing model. Here we are introduced to new functionality from sklearn,
+sklearn.preprocessing. We tune the model and go from a very simple logistic regression model,
+to using a little algebra - polynomials. By comparing the outputs between a simple logistical regression
+and the polynomial model, we see the polynomial model reveals a higher prediction accuracy. 
+It serves to point out a hint, from the output derived from running the raw data visualization programs
+starting with 00x- (000-xxx, 001-xxx, 002-xxx). The data does not fit or produce the training answers,
+which can be mapped to a simple line. We should consider using a more accurate model. 
+
+
+
 # References:
 1. Minsuk Heo - "Kaggle - Titanic Data Analysis".
 2. Ju Liu - "Predicting Titanic survivors with machine learning".
