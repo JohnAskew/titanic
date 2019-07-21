@@ -32,7 +32,7 @@ about data contents that deems further exploration?
 #### 003-titanic-visualize-rawdata-compare.py
 Returning to more generalized presentation of our data content,
 we introduce using a KDE or Kernal Density Estimator to our 
-bar chart - see Class wrt Age chart. Suggested you 
+bar chart - see Class wrt Age chart. Suggested that one 
 "Google" KDE chart and understand what value it adds.
 
 #### 010-titanic-feature-mapping-and-engineering.py
@@ -49,11 +49,11 @@ or NULLS).
 
 #### 020-titanic-predict-logic-regression.py
 Learning can be as much observing what NOT to do as learning what to do. 
-Here we use a simple LogisticRegression example. We observer the prediction displayed in the command line output, 
-is NOT that accurate, ergo propter hoc, we should look for a more accurate model 
+Here we use a simple LogisticRegression example. We observe the prediction displayed in the command line output, 
+is NOT that accurate, ergo propter hoc, we should strive for greater accuracy
 or at least tune our existing model. Here we are introduced to new functionality from sklearn,
 sklearn.preprocessing. We tune the model and go from a very simple logistic regression model,
-to using a little algebra - polynomials. By comparing the outputs between a simple logistical regression
+to using algebra - polynomials. By comparing the outputs between a simple logistical regression
 and the polynomial model, we see the polynomial model reveals a higher prediction accuracy. 
 It serves to point out a hint, from the output derived from running the raw data visualization programs
 starting with 00x- (000-xxx, 001-xxx, 002-xxx). The data does not fit or produce the training answers,
@@ -82,7 +82,7 @@ for a let-down, but chins high and chests out, as we run the next models, our ac
 
 #### 022-titanic-tune-random-forest.py
 This modules moves into more intermediate aspects of machine learning and negligibly more advanced
-Python functionality: cross_validating our results, generating interactive charts revealing 
+Python functionality: cross validating our results, generating interactive charts revealing 
 the model's accuracy and additional feature engineering. This module further relies on model tuning 
 and engages user to tune the model by changing the option's arguments. Module objective is to engage user
 in changing arguments (settings) for reviewing the impact to prediction accuracy. You may skip reading the 
