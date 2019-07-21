@@ -164,4 +164,5 @@ project is to get the user engaged and start thinking outside the narrow box of 
 1. Minsuk Heo - "Kaggle - Titanic Data Analysis".
 2. Ju Liu - "Predicting Titanic survivors with machine learning".
 3. Mike Bernico - "Introduction to Pandas with Titanic Dataset"
+4. John Harrison - "Sentdex - KMeans with Titanic Dataset - Practical Machine Learning"
 ```
