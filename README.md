@@ -131,7 +131,18 @@ command line output of prediction accuracy and a second opinion using cross_vali
 introduced. 
 
 #### 040-titanic-simple-KMeans-predict.py
-Stubbed until module finalized.
+Advanced Python functionality to feature engineer data to fit the KMeans model. This module introduces an
+alternative way to convert catagorical data and non-numeric data to numeric format. The other examples 
+rely on mapping ranges to represent ranges of non-numeric data. This module attempts to manage non-numeric
+data using lists and dictionaries to track each non-numeric data value and mapping it to a number. 
+The first non-numeric data value for any given feature is mapped to the value 0. Any other row containing
+the same column data value receives a 0 in place of the non-numeric data. The next non-numeric data value
+different from the first value we mapped to 0, is assigned or mapped to 1 and so on. Example, if the first
+5 rows contain embarked data of S, C or Q, then any column containing 'S' in the embarked column would be
+changed to a 0. Any row containing 'C' in the embarked column would be mapped to a 1. Subsequently, the 
+value of 'Q' would be mapped to a 2, and so on.
+
+End result is a self reported accuracy rate and a predicted output csv file for uploading to kaggle.
 
 #### 100-example-using-dummies.py
 Practice module demonstrating Panda's get_dummy functionality.
