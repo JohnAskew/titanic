@@ -14,6 +14,10 @@ pay attention to the x-axis of each histogram, noting which columns contain only
 few values vs. a broad range of values, which will require feature engineering - which 
 will be covered in later modules.
 
+#### 000-titanic-visualize-data-dictionary.py
+This module gives information about the titanic dataset as well as demonstrates using 
+plots with axis (axes), dictionaries and slicing the dictionary.
+
 #### 001-titanic-visualize-rawdata-compare.py
 Raw data visuals comparing data (features, or each relevant column in spreadsheet)
 to who survived. It demonstrates simply code for extracting data
