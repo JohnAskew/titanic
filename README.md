@@ -1,13 +1,13 @@
 
 This project aims to demonstrate Python using simple machine learning models. 
-Demonstrated topics include using classes for file i/o, functions to organize code, 
+Demonstrated topics include using: *classes for file i/o, functions to organize code, 
 importing your own custom modules, using pickle to write and then read data
-and starter examples for data analytics and machine learning. The term Data Science
+and starter examples for data analytics and machine learning*. The term Data Science
 is deliberately avoided; this project is developer driven and not authored by a Data Scientist.
 
 # USAGE:
 
-Start by running: 
+_Start by running_: 
 ### 000-START-HERE-titanic-visualize_raw-histograms.py.
 
 It will generate a visualized page showing histograms of columns containing numeric data.
@@ -167,8 +167,8 @@ containing 0 and 1. Feel free to change the code and implement your own solution
 project is to get the user engaged and start thinking outside the narrow box of the example's provided.
 
 # References:
-1. Minsuk Heo - "Kaggle - Titanic Data Analysis".
-2. Ju Liu - "Predicting Titanic survivors with machine learning".
-3. Mike Bernico - "Introduction to Pandas with Titanic Dataset".
-4. John Harrison - "Sentdex - KMeans with Titanic Dataset - Practical Machine Learning".
+1. **Minsuk Heo** - "_Kaggle - Titanic Data Analysis_".
+2. **Ju Liu** - "_Predicting Titanic survivors with machine learning_".
+3. **Mike Bernico** - "_Introduction to Pandas with Titanic Dataset_".
+4. **John Harrison** - __*Sentdex*__ - "_KMeans with Titanic Dataset - Practical Machine Learning_".
 ```
