@@ -1,12 +1,14 @@
+
 This project aims to demonstrate Python using simple machine learning models. 
 Demonstrated topics include using classes for file i/o, functions to organize code, 
 importing your own custom modules, using pickle to write and then read data
 and starter examples for data analytics and machine learning. The term Data Science
 is deliberately avoided; this project is developer driven and not authored by a Data Scientist.
 
-## USAGE:
+# USAGE:
 
-Start by running 000-START-HERE-titanic-visualize_raw-histograms.py.
+Start by running: 
+### 000-START-HERE-titanic-visualize_raw-histograms.py.
 
 It will generate a visualized page showing histograms of columns containing numeric data.
 The intent is to introduce the user to data exploration. With the visualized page,
@@ -14,16 +16,16 @@ pay attention to the x-axis of each histogram, noting which columns contain only
 few values vs. a broad range of values, which will require feature engineering - which 
 will be covered in later modules.
 
-#### 000-titanic-visualize-data-dictionary.py
+### 000-titanic-visualize-data-dictionary.py
 This module gives information about the titanic dataset as well as demonstrates using 
 plots with axis (axes), dictionaries and slicing the dictionary.
 
-#### 001-titanic-visualize-rawdata-compare.py
+### 001-titanic-visualize-rawdata-compare.py
 Raw data visuals comparing data (features, or each relevant column in spreadsheet)
 to who survived. It demonstrates simply code for extracting data
 and using simple bar charts.
 
-#### 002-titanic-visualize-rawdata-compare.py
+### 002-titanic-visualize-rawdata-compare.py
 Raw data presenting more stringent features (column data)
 than 001-titanic-visualize-rawdata-compare.py. Here we 
 move from simple data exploration and start moving towards 
@@ -33,13 +35,13 @@ does this give me a better idea of what the data looks like?
 Does a particular chart give me additional information 
 about data contents that deems further exploration?
 
-#### 003-titanic-visualize-rawdata-compare.py
+### 003-titanic-visualize-rawdata-compare.py
 Returning to more generalized presentation of our data content,
 we introduce using a KDE or Kernal Density Estimator to our 
 bar chart - see Class wrt Age chart. Suggested that one 
 "Google" KDE chart and understand what value it adds.
 
-#### 010-titanic-feature-mapping-and-engineering.py
+### 010-titanic-feature-mapping-and-engineering.py
 Before we run models, we aim to reduce data cardinality (diversity of data values)
 to column formats optimized for machine learning. Here 
 assumptions are made and data is manipulated to fit our 
@@ -51,7 +53,7 @@ we fill in to replace the missing data, as machine learning
 does not fare well with missing data or "nan" (not a number,
 or NULLS).
 
-#### 020-titanic-predict-logic-regression.py
+### 020-titanic-predict-logic-regression.py
 Learning can be as much observing what NOT to do as learning what to do. 
 Here we use a simple LogisticRegression example. We observe the prediction displayed in the command line output, 
 is NOT that accurate, ergo propter hoc, we should strive for greater accuracy
@@ -65,7 +67,7 @@ which can be mapped to a simple line. We should consider using a more appropriat
 the previous point? We are looking for a more appropriate model, not a more accurate model. The Zen lies
 in the addage: "What is good is the enemy of what is best".
 
-#### 021-titanic-predict-decision-tree.py
+### 021-titanic-predict-decision-tree.py
 The point of this module is to prove you can't just take predictions as being true and 
 as accurate as they report. Sad, I know. We start with simple decision tree models,
 where we now are exposed to tuning a model using options (parameters and their arguments).
@@ -74,7 +76,7 @@ An output file of predictions is generated and can be uploaded to the
 kaggle.com's "Titanic competition" website for judging the actual results. 
 
 There is a second model, which is a generalized decision tree. Here we specify more options to further tune the model. The model paragraph being tuned appears as:
-##### generalized_tree = tree.DecisionTreeClassifier(
+#### generalized_tree = tree.DecisionTreeClassifier(
      random_state = 42
     ,max_depth =10
     ,min_samples_split =5 ...
@@ -84,7 +86,7 @@ is the prediction result listed in the command line output, as well as a predict
 which too, can be uploaded to kaggle.com for judging the actual results of our model. Be prepared 
 for a let-down, but chins high and chests out, as we run the next models, our accuracy does truly improve.
 
-#### 022-titanic-tune-random-forest.py
+### 022-titanic-tune-random-forest.py
 This modules moves into more intermediate aspects of machine learning and negligibly more advanced
 Python functionality: cross validating our results, generating interactive charts revealing 
 the model's accuracy and additional feature engineering. This module further relies on model tuning 
@@ -116,7 +118,7 @@ objective is to point out to the user, that feature engineering is an art (imho)
 to change and manipulate the data contained in the cabin column, to drive what ever results you are after. 
 Our example simply uses the very first character as the cabin.
 
-#### 030-titanic-tune_models_and_test.py
+### 030-titanic-tune_models_and_test.py
 One man's meat is another man's poison. One model's optimized parameter is the death of another model. 
 Ensure you are comfortable with module 022-titanic-tune-random-forest.py before executing this module.
 Warning, this module's visualizations of tuning accuracy takes time and consider this a 5 minute investment of 
@@ -124,13 +126,15 @@ your time to get through the entire module. This module introduces new models an
 intricacies of tuning each model. The same tuning parameter can produce different results between models. 
 Each model produces a command line output of prediction results as well as a csv file for uploading to kaggle.com.
 
-#### 031-test-general-tree.py
+### 031-test-general-tree.py
 Breather, in terms of complexity and time. Simple repeat of Decision Tree using the DecisionTreeClassifer model
 to produce prediction results and a results csv file for uploading to kaggle.com. NO visals generated, just 
 command line output of prediction accuracy and a second opinion using cross_validation functionality previously
 introduced. 
 
-#### 040-titanic-simple-KMeans-predict.py
+### 040-titanic-simple-KMeans-predict.py 
+*In-Progress: Still validating results. Use with caution.*
+
 Advanced Python functionality to feature engineer data to fit the KMeans model. This module introduces an
 alternative way to convert catagorical data and non-numeric data to numeric format. The other examples 
 rely on mapping ranges to represent ranges of non-numeric data. This module attempts to manage non-numeric
@@ -142,12 +146,14 @@ different from the first value we mapped to 0, is assigned or mapped to 1 and so
 changed to a 0. Any row containing 'C' in the embarked column would be mapped to a 1. Subsequently, the 
 value of 'Q' would be mapped to a 2, and so on.
 
-End result is a self reported accuracy rate and a predicted output csv file for uploading to kaggle.
+This module also exposes user to more intermediate numpy functionality, reshape, as well as giving 
+another example of sklearn's preprocessing functionality. End result is a self reported accuracy rate 
+and a predicted output csv file for uploading to kaggle.
 
-#### 100-example-using-dummies.py
+### 100-example-using-dummies.py
 Practice module demonstrating Panda's get_dummy functionality.
 
-#### 101-example-feature-engineering-using-dummies.py
+### 101-example-feature-engineering-using-dummies.py
 Practice module which feature engineer's "sex" and "embarked" columns and then feeds results to Panda's get_dummy.
 End result is new dataframe with new columns matching the engineered "sex" and "embarked" values. Upon review
 you may be considering having 2 columns to represent "sex" as being redundant. That would be a secondary point of 
@@ -163,6 +169,6 @@ project is to get the user engaged and start thinking outside the narrow box of 
 # References:
 1. Minsuk Heo - "Kaggle - Titanic Data Analysis".
 2. Ju Liu - "Predicting Titanic survivors with machine learning".
-3. Mike Bernico - "Introduction to Pandas with Titanic Dataset"
-4. John Harrison - "Sentdex - KMeans with Titanic Dataset - Practical Machine Learning"
+3. Mike Bernico - "Introduction to Pandas with Titanic Dataset".
+4. John Harrison - "Sentdex - KMeans with Titanic Dataset - Practical Machine Learning".
 ```
