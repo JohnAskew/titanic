@@ -54,7 +54,7 @@ dfm.usage()
 
 
 fig = df.hist(grid = True,   xlabelsize = 7, xrot = 45, ylabelsize = 7, figsize = (15,20), layout = (2,4), bins = 10)
-plt.suptitle("Titanic training data: raw data histograms")
+plt.suptitle("Titanic training data: raw NUMERIC data histograms --> Identify which columns have only few values and which will need to be feature engineered")
 plt.show()
 
 with open("000-train_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
