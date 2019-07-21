@@ -26,6 +26,7 @@ def handle_non_numerical_data(dataset):
             for unique in unique_elements:
                 if unique not in text_digit_vals:
                     text_digit_vals[unique] = x
+                    print("Function: handle_non_numerical_data is mapping " ,unique, "to number:", x)
                     x +=1
 
             dataset[column] = list(map(convert_to_int, dataset[column]))
@@ -47,7 +48,7 @@ print(test.isna().any())
 
 
 for dataset in train_test_data:
-    dataset.drop(columns = ['name'], axis =1, inplace = True)
+    dataset.drop(columns = ['name', 'ticket', 'parch', ], axis =1, inplace = True)
     dataset.convert_objects(convert_numeric = True)
     print(dataset.columns)
 #-------------------------------------#
@@ -55,6 +56,9 @@ for dataset in train_test_data:
 #-------------------------------------#
 for dataset in train_test_data:
      tu.map_cabin(dataset)
+#-------------------------------------#
+# Fill in missing values for embarked and fare
+#-------------------------------------#
      tu.map_embarked(dataset)
      tu.map_fare(dataset)
 #-------------------------------------#
@@ -68,10 +72,15 @@ for dataset in train_test_data:
 #-------------------------------------#
 for dataset in train_test_data:
     dataset = handle_non_numerical_data(dataset)
-    #dataset.drop(columns = ['ticket'], axis = 1, inplace = True) # Needed for 1 pt accuracy
 
-train.to_csv('040-train-out.csv')
+train.to_csv('040-train-out.csv') #Just output for content review midway thru module. For checkpoint only.
 
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+# HINT: Best Practice uses capital X for matrix data (2 dimensions) and lowercase y for the scalar array (1 dimension).
+#       This would correspond to our train (training data) as "X". Lowercase 'y' will be used to keep track of
+#       the surviced column we removed from 'X'. Notice we are not using cross validation, but rather comparing 
+#       the train data predictions to the actual "survived" column we saved off as 'y'.
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 X = np.array(train.drop(['survived'], axis = 1).astype(float)) # inplace = True))
 X = preprocessing.scale(X) #Adds 20% accuracy
 y = np.array(train['survived'])
