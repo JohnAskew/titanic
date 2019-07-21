@@ -91,7 +91,7 @@ remainder of this section and simply run the module.
 We introduce cross validation functionality to review our generated predictions
 and provide a second opinion of how accurate our predictions actually were. This module also exposes the user
 to Panda's "get_dummy" functionality, which takes a feature (column), reviews the contents and creates 
-new columns containing only a zero or a one. This 0 or 1 state if referred to a "binary" state, 
+new columns containing only a zero or a one. This 0 or 1 state, if referred to as a "binary" state, 
 implies there are only 2 answers: 0 or 1, True or False, etc. Example: our "sex" (gender) column 
 contains either "male" or "female". After sending the column "sex" through the Panda's get_dummy functionality
 results in 2 new columns - "sex_male" and "sex_female", each column containing either 0 or 1. If the "sex_male"
