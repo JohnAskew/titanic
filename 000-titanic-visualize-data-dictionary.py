@@ -61,5 +61,5 @@ for j in range(9):
     axes.flat[j].text(0.1, 0.2, dict_values[j], horizontalalignment = 'left', color = 'darkgreen')
 
 fig = gcf()
-fig.suptitle("Titanic Data Dictionary", fontsize=14)
+fig.suptitle("Titanic Data Dictionary demonstrated with plotting", fontsize=14)
 plt.show()

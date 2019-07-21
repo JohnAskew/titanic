@@ -37,6 +37,14 @@ def handle_non_numerical_data(dataset):
 train = dfm.get_df('train.csv')
 test = dfm.get_df('test.csv')
 train_test_data = [train, test]
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+# HINT: test data contains nulls in age, fare and cabin columns.
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+print("#-------------------------------------#")
+print("# WARNING - test dataset contains nulls")
+print("#-------------------------------------#")
+print(test.isna().any())
+
 
 for dataset in train_test_data:
     dataset.drop(columns = ['name'], axis =1, inplace = True)
@@ -47,6 +55,8 @@ for dataset in train_test_data:
 #-------------------------------------#
 for dataset in train_test_data:
      tu.map_cabin(dataset)
+     tu.map_embarked(dataset)
+     tu.map_fare(dataset)
 #-------------------------------------#
 # Age: Clean up Nan by looking at pclass for median age
 #-------------------------------------#
@@ -81,7 +91,18 @@ print("#-------------------------------------#")
 print("# KMeans prediction accuracy self reports as: ", correct/len(X))
 print("#-------------------------------------#")
 
-    #labels = clf.labels_
+prediction = clf.predict(test)
+#
+## Submission
+#
+import pandas as pd 
+submission = pd.DataFrame({
+    "PassengerID":test['passengerid'],
+    "Survived":prediction
+    })
 
+submission.to_csv('submission_KMeans.csv')
+pd.read_csv('submission_KMeans.csv')
+print(submission.sample(n=5))
 
 

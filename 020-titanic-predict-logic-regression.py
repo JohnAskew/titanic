@@ -3,7 +3,7 @@ import pandas as pd
 import titanic_utils as tu
 from sklearn import linear_model, preprocessing
 from askew_utils import DF_Magic as dfm 
-
+'''This module uses Regression models, meaning the data is ordered and continuous.'''
 try:
     if os.path.exists("010-test_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
         with open("010-test_lowercase_cols.pickle", 'rb') as in_file:
