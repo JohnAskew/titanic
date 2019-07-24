@@ -99,17 +99,28 @@ for i in range(len(X)):
 print("#-------------------------------------#")
 print("# KMeans prediction accuracy self reports as: ", correct/len(X))
 print("#-------------------------------------#")
+results = []
+Y = test.copy()
+Y = preprocessing.scale(test)
+clf.fit(Y)
+correct = 0
+for i in range(len(Y)):
+    predict_me = np.array(Y[i].astype(float))
+    predict_me = predict_me.reshape(-1, len(predict_me))
+    prediction = clf.predict(predict_me)
+    if prediction > 0:
+        results.append(1)
+    else:
+        results.append(0)
 
-prediction = clf.predict(test)
-#
 ## Submission
 #
 import pandas as pd 
 submission = pd.DataFrame({
     "PassengerID":test['passengerid'],
-    "Survived":prediction
+    "Survived":results #prediction
     })
-
+submission.set_index('PassengerID', inplace = True)
 submission.to_csv('submission_KMeans.csv')
 pd.read_csv('submission_KMeans.csv')
 print(submission.sample(n=5))
