@@ -93,15 +93,23 @@ print(dataset.corr(method = 'pearson').round(3))
 #-------------------------------------#
 # Create AGE dataframe and Scale age down between -1 and 1
 #-------------------------------------#
-X_age = pd.DataFrame(dataset, columns = ['age'])
+X_age = pd.DataFrame(dataset, columns = ['age']).copy(deep = True)
 from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler, scale
 X_age['age_scaled'] = scale(X_age['age'])
 X_age.drop(columns = ['age'], inplace = True)
-print(X_age)
+print("#-------------------------------------#")
+print("# AGE scaled between 0 and 1")
+print("#-------------------------------------#")
+print(X_age.sample(n=5))
 #-------------------------------------#
+# Display Catagorical Data
 #-------------------------------------#
-# df_pure = dataset.dropna(axis = 0, subset = ["sex","pclass","embarked",'age'],inplace = True)
+print("#-------------------------------------#")
+print("# Catagorical features")
+print("#-------------------------------------#")
+print(dataset[dataset.columns[dataset.dtypes  == 'object']].describe())
+
 # print(df_pure)
 #-------------------------------------#
 #-------------------------------------#
