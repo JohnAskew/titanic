@@ -437,7 +437,7 @@ submission = pd.DataFrame({
     "PassengerID":test['passengerid'],
     "Survived":prediction
     })
-
+submission.set_index('PassengerID', inplace = True)
 submission.to_csv('submission_RandomForestClassifier.csv')
 pd.read_csv('submission_RandomForestClassifier.csv')
 print(submission.sample(n=5))
