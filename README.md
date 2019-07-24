@@ -150,6 +150,16 @@ This module also exposes user to more intermediate numpy functionality, reshape,
 another example of sklearn's preprocessing functionality. End result is a self reported accuracy rate 
 and a predicted output csv file for uploading to kaggle.
 
+### 070-titanic-tune_randomforestclassifier_and_test.py
+Random Forest Classifier model. No new functionality introduced. Provides framework to tune the model and the cross validation scoring functionality.
+
+As the tests can be time consuming, a new option was added at the top of the module, a set of
+model_tuned switches which if a switch is set to True, then that corresponding test and graphical 
+output will be skipped. If you wish to tune a particular model parameter, ensure the corresponding
+model_tuned switch is set to false. 
+
+Final result is predicted survivors output csv fit to upload to kaggle.com.
+
 ### 100-example-using-dummies.py
 Practice module demonstrating Panda's get_dummy functionality.
 
