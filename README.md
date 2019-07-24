@@ -176,6 +176,10 @@ too advanced a topic to explain on an introductory project. Ideally, there would
 containing 0 and 1. Feel free to change the code and implement your own solution. The overall objective of this 
 project is to get the user engaged and start thinking outside the narrow box of the example's provided.
 
+### 1000-titanic-code-snippets-and-tricks.py
+Runnable code giving examples of how to extract and display various bits of information about the titanic data.
+
+
 # References:
 1. **Minsuk Heo** - "_Kaggle - Titanic Data Analysis_".
 2. **Ju Liu** - "_Predicting Titanic survivors with machine learning_".
