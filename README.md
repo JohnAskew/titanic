@@ -142,6 +142,9 @@ This module also exposes user to more intermediate numpy functionality, reshape,
 another example of sklearn's preprocessing functionality. End result is a self reported accuracy rate 
 and a predicted output csv file for uploading to kaggle.
 
+### 060-titanic-tune_dtreeclassifier_and_test.py
+Decision Tree Classifier tune, test and build prediction model.
+
 ### 070-titanic-tune_randomforestclassifier_and_test.py
 Random Forest Classifier model. No new functionality introduced. Provides framework to tune the model and the cross validation scoring functionality.
 
