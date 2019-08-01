@@ -142,6 +142,9 @@ This module also exposes user to more intermediate numpy functionality, reshape,
 another example of sklearn's preprocessing functionality. End result is a self reported accuracy rate 
 and a predicted output csv file for uploading to kaggle.
 
+### 050-titanic-tune_knn_and_test.py
+Simple K Nearest Neighbors model. Tune, test and build prediction model.
+
 ### 060-titanic-tune_dtreeclassifier_and_test.py
 Decision Tree Classifier tune, test and build prediction model.
 
