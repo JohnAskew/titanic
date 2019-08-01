@@ -49,16 +49,24 @@ except:
     os.system('pip install pickle')
     import pickle
 
-df = dfm.get_df('train.csv')
-dfm.usage()
+try:
+    train = dfm.get_df('http://bit.ly/kaggletrain')
+except:
+    train = dfm.get_df('train.csv')
+try:
+    test = dfm.get_df('http://bit.ly/kaggletest')
+except:
+    test = dfm.get_df('test.csv')
+
+dfm.usage() # just so you know it's available. Only time we run this.
 
 
-fig = df.hist(grid = True,   xlabelsize = 7, xrot = 45, ylabelsize = 7, figsize = (15,20), layout = (2,4), bins = 10)
+fig = train.hist(grid = True,   xlabelsize = 7, xrot = 45, ylabelsize = 7, figsize = (15,20), layout = (2,4), bins = 10)
 plt.suptitle("Titanic training data: raw NUMERIC data histograms --> Identify which columns have only few values and which will need to be feature engineered")
 plt.show()
 
 with open("000-train_lowercase_cols.pickle", "wb") as in_file:    #Pickle saves results as reuable object
-        pickle.dump(df, in_file)                     #Save results from above to Pickle.
+        pickle.dump(train, in_file)                     #Save results from above to Pickle.
 
 
 

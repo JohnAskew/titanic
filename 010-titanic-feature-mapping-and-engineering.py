@@ -22,7 +22,12 @@ def bar_chart(feature):
 #######################################
 # M A I N   L O G I C   S T A R T S  
 #######################################
-if os.path.exists("000-train_lowercase_cols.pickle"):
+
+if os.path.exists("000-train_prefill_age_cabin.pickle"):
+    with open("000-train_prefill_age_cabin.pickle", 'rb') as in_file:
+        train = pickle.load(in_file)
+        print("Loading 000-train_prefill_age_cabin.pickle")
+elif os.path.exists("000-train_lowercase_cols.pickle"):
     with open("000-train_lowercase_cols.pickle", 'rb') as in_file:
         train = pickle.load(in_file)
         print("Loading 000-train_lowercase_cols.pickle")
