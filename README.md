@@ -1,6 +1,7 @@
 
 This project aims to demonstrate Python using simple machine learning models. 
 Demonstrated topics include using: *classes for file i/o, functions to organize code, 
+plotting, including visualizing the data dictionary,through plotting (not always a graph),
 importing your own custom modules, using pickle to write and then read data
 and starter examples for data analytics and machine learning*. The term Data Science
 is deliberately avoided; this project is developer driven and not authored by a Data Scientist.
@@ -16,7 +17,17 @@ pay attention to the x-axis of each histogram, noting which columns contain only
 few values vs. a broad range of values, which will require feature engineering - which 
 will be covered in later modules.
 
+### 000-titanic-code-snippets-and-tricks
+Demonstrates new ways to extract and organize data. There are no visualizations, only
+command line output displaying the information requested about selected data. MIGHT
+be helpful in feature selection, at least from an ideas perspective.
+
+### 000-titanic-visualize_complete_records
+Extracts and visualizes only complete records, with no missing data. The visualizations
+include comparing column values split out by survived vs. died.
+
 ### 000-titanic-visualize-data-dictionary.py
+Demonstrates plotting does not have to include points on a graph.
 This module gives information about the titanic dataset as well as demonstrates using 
 plots with axis (axes), dictionaries and slicing the dictionary.
 
