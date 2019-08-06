@@ -14,8 +14,10 @@ _Start by running_:
 It will generate a visualized page showing histograms of columns containing numeric data.
 The intent is to introduce the user to data exploration. With the visualized page,
 pay attention to the x-axis of each histogram, noting which columns contain only a 
-few values vs. a broad range of values, which will require feature engineering - which 
-will be covered in later modules.
+few values vs. a broad range of values, which may require feature engineering -  covered
+in later modules. Much can be written on feature engineering, so keeping it simple, 
+machine learning processes numbers more efficiently than other data, and too many 
+columns can bias the model and impede the model's effectiveness.
 
 ### 000-titanic-code-snippets-and-tricks
 Demonstrates new ways to extract and organize data. There are no visualizations, only
