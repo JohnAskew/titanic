@@ -98,7 +98,7 @@ is the prediction result listed in the command line output, as well as a predict
 which too, can be uploaded to kaggle.com for judging the actual results of our model. Be prepared 
 for a let-down, but chins high and chests out, as we run the next models, our accuracy does truly improve.
 
-### 022-titanic-tune-random-forest.py
+### 022-titanic-tune-random-forest.py (more feature engineering, too)
 This modules moves into more intermediate aspects of machine learning and negligibly more advanced
 Python functionality: cross validating our results, generating interactive charts revealing 
 the model's accuracy and additional feature engineering. This module further relies on model tuning 
@@ -116,11 +116,17 @@ results in 2 new columns - "sex_male" and "sex_female", each column containing e
 column contains a 1, then that record is for a male. You may be wondering why we need 2 separate columns 
 to specify sex or gender. You don't. This was only an example, simplified for explanation.
 
-Starting with a simple RandomForestRegressor model, we take our features, or columns
-with numeric data (not data containing alphabetic), train and make a prediction, serving to build a baseline.
-Observing there is a considerable amount of code that has been commented out, so as not to run, remains to 
-allow the user to uncomment or execute the code, as a means of exploration. Secondarily, it leaves me 
-bread crumbs to maintain the code after a few 24 hours have passed.
+Example of feature engineering in the code:
+
+for variable in categorical_variables:
+    dummies = pd.get_dummies(X[variable], prefix = variable) # Create an array of dummies
+    X = pd.concat([X, dummies], axis = 1) # Update X to include dummies and drop the main variable
+    X.drop([variable], axis = 1, inplace = True)
+
+for variable in categorical_variables:
+    dummies = pd.get_dummies(Y[variable], prefix = variable) # Create an array of dummies
+    Y = pd.concat([Y, dummies], axis = 1) # Update X to include dummies and drop the main variable
+    Y.drop([variable], axis = 1, inplace = True)
 
 Moving on, we feature engineer the column / feature, "cabin". Past observations of the raw data reveals a wide range
 of data for this feature, generally in the format of a letter and then some numbers, such as C28. In a few instances,
