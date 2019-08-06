@@ -25,26 +25,50 @@ def clean_catagoricals(x):
 # V A R I A B L E S to adjust processing accuracy
 #--------------------------------------#
 var_bootstrap = True
-var_n_estimators = 1000# 1000 (400 = .873400)
-oob_score = False   # True of False does not seem to impact accuracy
+var_n_estimators = 500# 1000 (400 = .873400)
+oob_score = True   # True of False does not seem to impact accuracy
 var_n_jobs = -1
 var_random_state = 1
-var_max_features = "auto"
-var_min_samples_leaf = 5 #(8 - .873757)
+var_max_features = 0.9
+var_min_samples_leaf = 1 #(8 - .873757)
 var_criterion = 'mse'
-var_max_depth = 30 #10
-var_warm = False
+var_max_depth = 10 #10
+var_warm = True
+
+n_estimator_options = [ 10, 20, 30, 40, 50 , 100, 200, 500, 1000, 1100 ]
+max_features_options = [ "auto", None, "sqrt", "log2", 0.9, 0.2]
+min_samples_leaf_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+max_depth_options = [1, 10, 20, 30, 40, 50,]
+criterion_options = ['mse', 'mae']
+
+
 
 if os.path.exists("010-train_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
     with open("010-train_lowercase_cols.pickle", 'rb') as in_file:
         X = pickle.load(in_file)
         print("Loading 010-train_lowercase_cols.pickle")
 else:
-    X = dfm.get_df('train.csv')
-    tu.clean_data(train) 
+    try:
+        X = dfm.get_dfm('http://bit.ly/kaggletrain')
+        tu.clean_data(train) 
+    except:
+        X = dfm.get_dfm('train.csv')
+        tu.clean_data(train) 
 
 y = X.pop("survived")
 
+if os.path.exists("010-test_lowercase_cols.pickle"): #020-train_cleaned_data-lowercase_cols.pickle"):
+    with open("010-test_lowercase_cols.pickle", 'rb') as in_file:
+        test = pickle.load(in_file)
+        print("Loading 010-test_lowercase_cols.pickle")
+else:
+    try:
+        test = dfm.get_dfm('http://bit.ly/kaggletest')
+        tu.clean_data(test) 
+    except:
+        test = dfm.get_dfm('test.csv')
+        tu.clean_data(test) 
+Y = test.copy()
 #
 ## Fill in missing values as machine learning does not fare well with nulls.
 #
@@ -90,6 +114,10 @@ print("BASELINE c-stat:", roc_auc_score(y, y_oob))
 X["cabin"] = X.cabin.apply(clean_cabin)
 for variable in categorical_variables:
     clean_catagoricals(X[variable]) #X[variable].fillna("Missing", inplace = True) # Fill in the missing data with the word, "Missing"
+
+Y["cabin"] = Y.cabin.apply(clean_cabin)
+for variable in categorical_variables:
+    clean_catagoricals(Y[variable]) #X[var
 #--------------------------------------#
 # Tweak 3:
 #--------------------------------------#
@@ -104,12 +132,23 @@ for variable in categorical_variables:
     X = pd.concat([X, dummies], axis = 1) # Update X to include dummies and drop the main variable
     X.drop([variable], axis = 1, inplace = True)
 
+for variable in categorical_variables:
+    dummies = pd.get_dummies(Y[variable], prefix = variable) # Create an array of dummies
+    Y = pd.concat([Y, dummies], axis = 1) # Update X to include dummies and drop the main variable
+    Y.drop([variable], axis = 1, inplace = True)
+
 print('#------------------------------#')
 print('## After tweaking, we have new columns:')
 print('##     Review output and ensure all columns')
 print('##     have the same value under "count" column')
 print('#------------------------------#')
+
 print(X.describe().T.round(2))
+
+print('#------------------------------#')
+print('## After tweaking, here is the new TEST dataset:')
+print('#------------------------------#')
+Y.info()
 
 #-------------------------------------#
 # Refine parameters for next training run
@@ -129,7 +168,7 @@ print('#------------------------------#')
 feature_importances = pd.Series(model.feature_importances_, index = X.columns)
 feature_importances.sort_values(inplace = True)
 feature_importances.plot(kind = 'barh', figsize = (12,4))
-plt.title('Columns by feature_importances')
+plt.title('RandomForestRegressor columns by feature_importances')
 plt.show()
 
 #-------------------------------------#
@@ -149,8 +188,6 @@ print('#------------------------------#')
 ## n_estimators - 1000 seems maximized
 #
 results = []
-n_estimator_options = [ 10, 20, 30, 40, 50 , 100, 200, 500, 1000, 1100 ]
-
 for trees in n_estimator_options:
     model = RandomForestRegressor(trees
                                 , bootstrap = var_bootstrap
@@ -166,7 +203,7 @@ for trees in n_estimator_options:
     results.append(roc)
 
 pd.Series(results, n_estimator_options).plot()
-plt.title('Varying n_estimator results')
+plt.title('Varying n_estimator results for RandomForestRegressor')
 plt.xlabel('Number of estimators')
 plt.ylabel('Accuracy')
 plt.show()
@@ -176,15 +213,16 @@ plt.show()
 # ## max_features - maximizes with "auto"
 # #
 results = []
-max_features_options = [ "auto", None, "sqrt", "log2", 0.9, 0.2]
-
 for max_features in max_features_options:
     model = RandomForestRegressor(bootstrap = var_bootstrap
-                                , n_estimators = 1000
+                                , n_estimators = var_n_estimators
                                 , oob_score = True
-                                , n_jobs = var_n_jobs 
+                                , n_jobs = var_n_jobs
                                 , random_state = var_random_state
-                                , max_features = max_features)
+                                , max_features = max_features
+                                , min_samples_leaf = var_min_samples_leaf
+                                , criterion = var_criterion
+                                , max_depth = var_max_depth)
     model.fit(X, y)
     print("max_features option", max_features)
     roc = roc_auc_score(y, model.oob_prediction_)
@@ -194,7 +232,7 @@ for max_features in max_features_options:
     results.append(roc)
 
 pd.Series(results, max_features_options).plot(kind = 'barh', xlim=(.85, .88))
-plt.title("Varying max_features")
+plt.title("Varying max_features for RandomForestRegressor")
 plt.xlabel('Accuracy')
 plt.ylabel('Max_feature')
 plt.show()
@@ -203,9 +241,6 @@ plt.show()
 # ## min_samples_leaf - maximizes at 5
 # #
 results = []
-min_samples_leaf_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-
 for min_samples in min_samples_leaf_options:
     model = RandomForestRegressor(bootstrap = var_bootstrap
                                 , n_estimators = var_n_estimators
@@ -213,7 +248,9 @@ for min_samples in min_samples_leaf_options:
                                 , n_jobs = var_n_jobs
                                 , random_state = var_random_state
                                 , max_features = var_max_features
-                                , min_samples_leaf = min_samples)
+                                , min_samples_leaf = min_samples
+                                , criterion = var_criterion
+                                , max_depth = var_max_depth)
     model.fit(X, y)
     print("min_samples", min_samples)
     roc = roc_auc_score(y, model.oob_prediction_)
@@ -223,7 +260,7 @@ for min_samples in min_samples_leaf_options:
     results.append(roc)
 
 pd.Series(results, min_samples_leaf_options).plot()
-plt.xlabel('min_samples_leaf_options')
+plt.xlabel('Varying min_samples_leaf_options for RandomForestRegressor')
 plt.ylabel('accuracy')
 plt.title('Varying min_samples_leaf')
 plt.show()
@@ -232,16 +269,16 @@ plt.show()
 # ## criterion  - mse shuts out mae
 # #
 results = []
-criterion_options = ['mse', 'mae']
-
 for criterion_option in criterion_options:
-    model = RandomForestRegressor(n_estimators = var_n_estimators
-                                  , oob_score = True
-                                  , n_jobs = var_n_jobs
-                                  , random_state = var_random_state
-                                  , max_features = var_max_features
-                                  , min_samples_leaf = var_min_samples_leaf
-                                  , criterion = criterion_option)
+    model = RandomForestRegressor(bootstrap = var_bootstrap
+                                , n_estimators = var_n_estimators
+                                , oob_score = True
+                                , n_jobs = var_n_jobs
+                                , random_state = var_random_state
+                                , max_features = var_max_features
+                                , min_samples_leaf = var_min_samples_leaf
+                                , criterion = criterion_option
+                                , max_depth = var_max_depth)
     model.fit(X,y)
     roc = roc_auc_score(y, model.oob_prediction_)
     print("criterion_option:", criterion_option)
@@ -251,16 +288,18 @@ for criterion_option in criterion_options:
     results.append(roc)
 
 pd.Series(results, criterion_options).plot()
+plt.title("Varying criterion for RandomForestRegressor")
+plt.xlabel('criterion')
+plt.ylabel("accuracy")
 plt.show()
+
 
 #
 ## Max_depth - peaks between 10 and 20. 20 at .87425 accurate
 ##
 
 results = []
-max_depth_options = [1, 10, 20, 30, 40, 50,]
-
-for max_depth in max_depth_options:
+for max_depth_option in max_depth_options:
     model = RandomForestRegressor(bootstrap = var_bootstrap
                                 , n_estimators = var_n_estimators
                                 , oob_score = True
@@ -269,20 +308,49 @@ for max_depth in max_depth_options:
                                 , max_features = var_max_features
                                 , min_samples_leaf = var_min_samples_leaf
                                 , criterion = var_criterion
-                                , max_depth = max_depth)
+                                , max_depth = max_depth_option)
     model.fit(X, y)
     roc = roc_auc_score(y, model.oob_prediction_)
-    print("max_depth option", max_depth)
+    print("max_depth option", max_depth_option)
     print('#------------------------------#')
     print("TRAIN session vary max_depth: c-stat:", roc)
     print('#------------------------------#')
     results.append(roc)
 pd.Series(results, max_depth_options).plot()
-plt.title("Varying max_depth")
+plt.title("Varying max_depth for RandomForestRegressor")
 plt.xlabel('max_depth')
 plt.ylabel("accuracy")
 plt.show()
 
+
+Y.drop(columns = ['passengerid'], inplace = True)
+
+model = RandomForestRegressor(bootstrap = var_bootstrap
+                                , n_estimators = var_n_estimators
+                                , oob_score = True
+                                , n_jobs = var_n_jobs
+                                , random_state = var_random_state
+                                , max_features = var_max_features
+                                , min_samples_leaf = var_min_samples_leaf
+                                , criterion = var_criterion
+                                , max_depth = var_max_depth)
+print("Before fitting, here is y:", y)
+Z = model.fit(X, y)
+print("Z: model.fit:", Z)
+Y_pred = model.predict(Y)
+#
+## Submission
+#
+import pandas as pd 
+submission = pd.DataFrame({
+    "PassengerID":test['passengerid'],
+    "Survived":Y_pred
+    })
+
+submission.to_csv('submission_RandomForestRegressor.csv')
+submission.set_index('PassengerID', inplace = True)
+pd.read_csv('submission_RandomForestRegressor.csv')
+print(submission.sample(n=5))
 #
 ## warmstart
 #
