@@ -1,7 +1,7 @@
 
 This project aims to demonstrate Python using simple machine learning models. 
 Demonstrated topics include using: *classes for file i/o, functions to organize code, 
-plotting, including visualizing the data dictionary,through plotting (not always a graph),
+plotting, including visualizing the data dictionary via plotting (not always a graph),
 importing your own custom modules, using pickle to write and then read data
 and starter examples for data analytics and machine learning*. The term Data Science
 is deliberately avoided; this project is developer driven and not authored by a Data Scientist.
